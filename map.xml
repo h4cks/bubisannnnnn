@@ -24,7 +24,6 @@
 <item slot="1">bow</item>
 <item slot="2" enchantment="dig_speed:3">iron_pickaxe</item>
 <item slot="3" bind="true">tnt</item>
-<item slot="4" amount="32" damage="11">stained clay</item><!-- 固いかもしれない -->
 <item slot="5" amount="1">golden_apple</item>
 <item slot="6" amount="16">golden_carrot</item>
 <item slot="7">fishing rod</item>
@@ -38,6 +37,7 @@
 <chestplate color="cd0000" bind="true">leather chestplate</chestplate>
 <leggings bind="true">chainmail leggings</leggings>
 <boots bind="true">chainmail boots</boots>
+<item slot="4" amount="32" damage="14">stained clay</item><!-- 固いかもしれない -->
 </kit>
 
 
@@ -46,6 +46,7 @@
 <chestplate color="0066cc" bind="true">leather chestplate</chestplate>
 <leggings bind="true">chainmail leggings</leggings>
 <boots bind="true">chainmail boots</boots>
+<item slot="4" amount="32" damage="11">stained clay</item><!-- 固いかもしれない -->
 </kit>
 </kits>
 
@@ -156,12 +157,12 @@
 
 
 <destroyable name="UFO" owner="red">
-<cuboid max="41,36,-28" min="41,28,-13"/>
+<cuboid max="41,37,-12" min="41,26,-29"/>
 </destroyable>
 
 
 <destroyable name="UFO" owner="blue">
-<cuboid max="-175,36,-14" min="-175,28,-29"/>
+<cuboid max="-175,37,-29" min="-175,26,-10"/>
 </destroyable>
 </destroyables>
 
