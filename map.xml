@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<map proto="1.3.3">
+<name>Invaders Must Die</name>
+<version>1.0.4</version><!-- 最初は互換性とかsugoi変わった/真ん中が機能の追加/最後がバグ取り -->
+<objective> 敵陣にある鉄製UFOの破壊 / Destruction of UFO in the enemy lines. </objective>
+
+
+<authors>
+<author>BubiHartman</author>
+</authors>
+
+
+<teams>
+<team max="18" color="blue">Blue Team</team>
+<team max="18" color="dark red">Red Team</team>
+</teams>
+
+
+<kits>
+
+
+<kit name="spawn">
+<item slot="0">iron_sword</item>
+<item slot="1">bow</item>
+<item slot="2" enchantment="dig_speed:3">iron_pickaxe</item>
+<item slot="3" bind="true">tnt</item>
+<item slot="4" amount="32" damage="11">stained clay</item><!-- 固いかもしれない -->
+<item slot="5" amount="1">golden_apple</item>
+<item slot="6" amount="16">golden_carrot</item>
+<item slot="7">fishing rod</item>
+<item slot="8" damage="16454">potion</item>
+<item slot="28" amount="24" bind="true">arrow</item><!-- スプラッシュ暗視6分 -->
+</kit>
+
+
+<kit name="red" parents="spawn">
+<helmet bind="true">chainmail helmet</helmet>
+<chestplate color="cd0000" bind="true">leather chestplate</chestplate>
+<leggings bind="true">chainmail leggings</leggings>
+<boots bind="true">chainmail boots</boots>
+</kit>
+
+
+<kit name="blue" parents="spawn">
+<helmet bind="true">chainmail helmet</helmet>
+<chestplate color="0066cc" bind="true">leather chestplate</chestplate>
+<leggings bind="true">chainmail leggings</leggings>
+<boots bind="true">chainmail boots</boots>
+</kit>
+</kits>
+
+<filters>
+<filter name="only-blue" parents="deny-all">
+<allow>
+<team>blue</team>
+</allow>
+</filter>
+
+<filter name="block-modify-limit-1" parents="deny-all">
+<allow>
+<block>tnt</block>
+<block>stained clay</block>
+<block>ladder</block>
+<block>iron_block</block>
+</allow>
+</filter>
+
+<filter name="block-modify-limit-2" parents="deny-all">
+<allow>
+<block>tnt</block>
+<block>stained clay</block>
+<block>ladder</block>
+</allow>
+</filter>
+
+<filter name="tnt-guard-iron">
+                    <all>
+                            <not>
+                                    <all>
+                                        <team>red</team>
+                
+                                            <cause>explosion</cause>
+                                            <not>
+                                                    <block>iron block</block>
+                                            </not>
+                                    </all>
+                            </not>
+                    </all>
+</filter>
+
+
+<filter name="only-red" parents="deny-all">
+<allow>
+<team>dark red</team>
+</allow>
+</filter>
+
+<filter name="outside">
+                    <not>
+                            <void/>
+                    </not>
+</filter><!-- air:1で設定した範囲のみを編集できるようにする -->
+</filters>
+
+<regions>
+<union name="blue-respawn"><!-- 青チームリスポーン出口を定義 -->
+<cuboid min="-134,22,-53" max="-125,41,-44"/>
+<cuboid min="-134,22,11" max="-125,41,2"/>
+</union>
+<union name="red-respawn"><!-- 赤チームリスポーン出口を定義 -->
+<cuboid min="0,22,-53" max="-9,40,-44"/>
+<cuboid min="0,22,11" max="-9,40,2"/>
+</union>
+
+<apply block="deny-all" message="You may not modify this area./リスポーン出入り口は編集できません。">
+	<region name="blue-respawn"/>
+	<region name="red-respawn"/>
+</apply>
+
+
+<!-- 地形編集の無効化 -->
+<apply block-break="block-modify-limit-1" block-place="block-modify-limit-2" message="特定のブロック以外は編集できません。/You can not modify blocks except ladder,tnt,ironblocks ,Stained Clay.">
+                    <rectangle min="-oo,-oo" max="oo,oo"/>
+</apply>
+
+<apply block="tnt-guard-iron">
+                    <rectangle min="-oo,-oo" max="oo,oo"/>
+</apply>
+
+
+<apply block="outside" message="`4You may not modify void area./範囲外は編集できません。">
+                    <rectangle min="-oo,-oo" max="oo,oo"/>
+</apply><!-- air:1で設定した範囲のみを編集できるようにする -->
+
+</regions>
+
+
+
+
+
+
+<spawns>
+<spawn team="blue" yaw="90" kit="blue">
+<cuboid min="-112,46,-19" max="-116,47,-23" />
+</spawn>
+<spawn team="dark red" yaw="-90" kit="red">
+<cuboid min="-20,46,-22" max="-16,47,-18" />
+</spawn>
+<default yaw="0">
+<cuboid min="-66,42,-97" max="-67,42,-95" />
+</default>
+</spawns>
+
+
+<destroyables completion="100%" materials="iron_block">
+
+
+<destroyable name="UFO" owner="red">
+<cuboid max="41,36,-28" min="41,28,-13"/>
+</destroyable>
+
+
+<destroyable name="UFO" owner="blue">
+<cuboid max="-175,36,-14" min="-175,28,-29"/>
+</destroyable>
+</destroyables>
+
+
+<itemremove>
+<item>chainmail helmet</item>
+<item>leather chestplate</item>
+<item>chainmail leggings</item>
+<item>chainmail boots</item>
+<item>stone_sword</item>
+<item>bow</item>
+<item>iron_pickaxe</item>
+<item>golden_apple</item>
+<item>golden_carrot</item>
+<item>fishing rod</item>
+<item>arrow</item>
+<item>iron_block</item>
+<item>iron_ingot</item>
+<item>potion</item>
+<item>stained_clay</item>
+</itemremove>
+
+
+
+
+
+
+
+
+
+
+<maxbuildheight>40</maxbuildheight>
+<autorespawn time="5s"/>
+<killreward>
+        <item>golden apple</item>
+        <item damage="8261">potion</item><!-- 治癒1 -->
+</killreward>
+<tnt>
+  <instantignite>on</instantignite>
+</tnt>
+<dimension>THE_END</dimension>
+<!-- ゲームモードの設定(TNTダメージの強化のため) -->
+<script>
+<![CDATA[
+match.on('start', function() {
+match.getWorld().setDifficulty("HARD");
+ });
+ ]]>
+</script>
+
+
+<include src="tutorial.xml"/>
+<tutorial>
+        <stage title="Destroy the Monument(DTM)">
+            <message>
+                <line>This map is a Destroy the Monument(DTM) map.</line>
+                <line>Monument is UFO.</line>
+            </message>
+            <message lang="ja_JP">
+                <line>このマップは Destroy the Monument(DTM)マップです。</line>
+                <line>敵陣奥のUFOが目標です。</line>
+</message>
+        <teleport>
+        <point yaw="-90" pitch="0">13,30,-20</point><!-- pitchは顎の上下の角度で,水平が0,真下が90 -->
+</teleport>
+        </stage>
+
+
+
+
+
+
+
+        <stage title="red spawn point">
+        <message>
+                <line>Here is red team’s  spawn point.</line>
+            </message>
+            <message lang="ja_JP">
+                <line>ここが赤チームのリスポーン地点です</line>
+</message>
+        <teleport>
+        <point yaw="90" pitch="45">-13,50,-20</point>
+        </teleport>
+        
+</stage>
+
+        <stage title="blue spawn point">
+        <message>
+                <line>Here is blue team’s  spawn point.</line>
+            </message>
+            <message lang="ja_JP">
+                <line>ここが青チームのリスポーン地点です</line>
+</message>
+        <teleport>
+        <point yaw="-90" pitch="45">-120,50,-20</point>
+</teleport>
+        </stage>
+
+        <stage title="TNT rule">
+        <message>
+                <line>TNT can break only iron blocks in this map.</line>
+            </message>
+<message lang="ja_JP">
+                <line>このマップではTNTは鉄ブロックのみを破壊できます。</line>
+</message>
+        <teleport>
+        <point yaw="65" pitch="0">-94,28,-39</point>
+</teleport>
+        </stage>
+
+        <stage title="glhf">
+            <message>
+                <line>Good Luck! Have Fun!</line>
+            </message>
+            <message lang="ja_JP">
+                <line>それではお楽しみください！</line>
+            </message>
+        </stage>
+</tutorial>
+
+
+</map>
