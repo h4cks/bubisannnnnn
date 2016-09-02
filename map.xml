@@ -162,7 +162,7 @@
 
 
 <destroyable name="UFO" owner="blue">
-<cuboid max="-175,37,-29" min="-175,26,-10"/>
+<cuboid max="-175,37,-12" min="-175,26,-29"/>
 </destroyable>
 </destroyables>
 
